@@ -9,20 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/auth/login", {
-      headers: {
-        // Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        email: "vahid@gmail.com",
-        password: "123456",
-      }),
-    })
-      // fetch(
-      //   "https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0"
-      // )
+    fetch("/api/users")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -30,8 +17,9 @@ export default function Home() {
       });
   }, []);
 
-  if (isLoading) return <p>LLLoading...</p>;
-  if (!data) return <p>No profile data</p>;
+  console.log(data);
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No data</p>;
 
   return (
     <div className={styles.container}>
