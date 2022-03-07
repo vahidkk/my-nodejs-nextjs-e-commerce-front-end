@@ -1,14 +1,15 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Sidebar from "./Sidebar";
 
 function Layout(props) {
   return (
-    <div>
+    <>
       <Navbar />
-      {/* the header nav bar goes here  */}
+      <Sidebar />
       <main>{props.children}</main>
       <Footer />
-    </div>
+    </>
   );
 }
 
