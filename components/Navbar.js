@@ -5,9 +5,11 @@ import { Menu } from "react-feather";
 import Link from "next/link";
 import { links } from "../utils/constants";
 import CartButtons from "./CartButtons";
+import { useSideBarContext } from "../context/context";
 
 const Nav = () => {
-  const openSidebar = () => {};
+  const { openSidebar } = useSideBarContext();
+
   return (
     <NavContainer>
       <div className="nav-center">

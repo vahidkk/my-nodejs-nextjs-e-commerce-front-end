@@ -1,9 +1,11 @@
 import { UserPlus, UserMinus, ShoppingCart } from "react-feather";
 import Link from "next/link";
 import styled from "styled-components";
+import { useSideBarContext } from "../context/context";
 
 const CartButtons = () => {
-  const closeSidebar = () => {};
+  const { closeSidebar } = useSideBarContext();
+
   return (
     <Wrapper className="cart-btn-wrapper">
       <span href="/cart" className="cart-btn1" onClick={closeSidebar}>

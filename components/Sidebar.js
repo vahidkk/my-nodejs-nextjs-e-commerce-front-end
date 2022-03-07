@@ -5,11 +5,11 @@ import { links } from "../utils/constants";
 import styled from "styled-components";
 import CartButtons from "./CartButtons";
 import { X } from "react-feather";
+import { useSideBarContext } from "../context/context";
 
 const Sidebar = () => {
-  const isSidebarOpen = true;
   const myUser = true;
-  const closeSidebar = () => {};
+  const { isSidebarOpen, closeSidebar } = useSideBarContext();
   return (
     <SidebarContainer>
       <aside
