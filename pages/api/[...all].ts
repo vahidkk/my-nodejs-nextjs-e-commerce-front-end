@@ -4,9 +4,9 @@ import httpProxyMiddleware from "next-http-proxy-middleware";
 export default (req: NextApiRequest, res: NextApiResponse) =>
   httpProxyMiddleware(req, res, {
 
-    target: "http://my-nodejs-e-commerce-back-end.herokuapp.com",
+    target: process.env.MY_API,
     changeOrigin: true,
-    cookieDomainRewrite:'localhost:3000',
+    cookieDomainRewrite:process.env.MY_FRONTEND_DOMAIN,
 
     pathRewrite: {
       "^/api/": '/api/v1/',

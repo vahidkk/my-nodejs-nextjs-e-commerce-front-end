@@ -5,6 +5,7 @@ import Hero from "../components/Hero";
 // import FeaturedProducts from "../components/FeaturedProducts";
 import Services from "../components/Services";
 import Contact from "../components/Contact";
+import { useAllProducts } from "../utils/useSWR";
 
 export default function Home() {
   // const [data, setData] = useState(null);
@@ -32,6 +33,9 @@ export default function Home() {
 
   // if (isLoading) return <p>Loading...</p>;
   // if (!data) return <p>No data</p>;
+  const { data, isLoading } = useAllProducts();
+  if (isLoading) return <h1>LoAdInG...</h1>;
+  return <h1>data: {toString(data)}</h1>;
 
   return (
     <main>
