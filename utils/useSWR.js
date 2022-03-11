@@ -16,3 +16,14 @@ export function useAllProducts() {
     isFeatured,
   };
 }
+
+export function useSingleProduct(id) {
+  const { data, error } = useSWR(`/api/products/${id}`);
+
+  console.log(data);
+  return {
+    data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
