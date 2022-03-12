@@ -8,7 +8,7 @@ const Product = ({ image, name, price, id }) => {
     <Wrapper>
       <div className="container">
         <Image height={225} width={300} src={image} alt={name} />
-        <Link href={`/products/${id}`} className="link">
+        <Link href={`/product/${id}`} className="link">
           click
         </Link>
       </div>

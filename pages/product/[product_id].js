@@ -6,6 +6,7 @@ import Loading from "../../components/Loading";
 import Error from "../../components/Error";
 import Stars from "../../components/Stars";
 import ProductImages from "../../components/ProductImages";
+import AddToCart from "../../components/AddToCart";
 import styled from "styled-components";
 import Link from "next/link";
 
@@ -20,8 +21,16 @@ const SingleProductPage = () => {
   if (isError) {
     return <Error />;
   }
-  const { name, price, description, stock, stars, reviews, company, images } =
-    data.product;
+  const {
+    name,
+    price,
+    description,
+    inventory,
+    stars,
+    reviews,
+    company,
+    images,
+  } = data.product;
   return (
     <Wrapper>
       <PageHero title={name} product />
@@ -38,7 +47,7 @@ const SingleProductPage = () => {
             <p className="desc"> {description}</p>
             <p className="info">
               <span>Available : </span>
-              {stock > 0 ? "In stock" : "out of stock"}
+              {inventory > 0 ? "In stock" : "out of stock"}
             </p>
             <p className="info">
               <span>SKU : </span>
@@ -49,7 +58,7 @@ const SingleProductPage = () => {
               {company}
             </p>
             <hr />
-            {/* {stock > 0 && <AddToCart product={data.product} />} Not implemented yet !*/}
+            {inventory > 0 && <AddToCart product={data.product} />}
           </section>
         </div>
       </div>
