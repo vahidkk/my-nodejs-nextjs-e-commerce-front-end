@@ -2,9 +2,11 @@ import { UserPlus, UserMinus, ShoppingCart } from "react-feather";
 import Link from "next/link";
 import styled from "styled-components";
 import { useSideBarContext } from "../context/context";
+import { useCartContext } from "../context/cart_context";
 
 const CartButtons = () => {
   const { closeSidebar } = useSideBarContext();
+  const { total_items, clearCart } = useCartContext();
 
   return (
     <Wrapper className="cart-btn-wrapper">
@@ -12,7 +14,7 @@ const CartButtons = () => {
         Cart
         <span className="cart-container">
           <ShoppingCart />
-          <span className="cart-value">11</span>
+          <span className="cart-value">{total_items}</span>
         </span>
       </span>
       <button type="button" className="auth-btn">

@@ -3,9 +3,13 @@ import styled from "styled-components";
 import Link from "next/link";
 import { FaCheck } from "react-icons/fa";
 import AmountButtons from "./AmountButtons";
+import { useCartContext } from "../context/cart_context";
+import { useRouter } from "next/router";
 
 const AddToCart = ({ product }) => {
   const { id, inventory, colors } = product;
+  const { addToCart } = useCartContext();
+  const router = useRouter();
 
   const [mainColor, setMainColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
@@ -56,13 +60,16 @@ const AddToCart = ({ product }) => {
           increase={increase}
           decrease={decrease}
         />
-        <Link
-          href="/cart"
+        <p
           className="btn"
-          // onClick={() => addToCart TO BE IMPLEMENTED LATER ! (id, mainColor, amount, product)}
+          onClick={() => {
+            console.log("JUST");
+            addToCart(id, mainColor, amount, product);
+            router.push("/cart");
+          }}
         >
           add to cart
-        </Link>
+        </p>
       </div>
     </Wrapper>
   );
@@ -111,6 +118,7 @@ const Wrapper = styled.section`
   .btn {
     margin-top: 1rem;
     width: 140px;
+    cursor: pointer;
   }
 `;
 export default AddToCart;

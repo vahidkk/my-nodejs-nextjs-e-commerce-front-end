@@ -7,7 +7,7 @@ const Product = ({ image, name, price, id }) => {
   return (
     <Wrapper>
       <div className="container">
-        <Image height={225} width={300} src={image} alt={name} />
+        <Image height={225} width={300} src={image[0]} alt={name} />
         <Link href={`/product/${id}`} className="link">
           click
         </Link>
