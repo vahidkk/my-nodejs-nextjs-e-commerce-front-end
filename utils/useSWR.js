@@ -1,7 +1,6 @@
 import useSWR from "swr";
 
 export function useAllProducts() {
-  // const { data, error } = useSWR(`/api/user/${id}`)
   const { data, error } = useSWR(`/api/products`);
   const isFeatured = data
     ? data.products.map((i) => {
@@ -25,5 +24,23 @@ export function useSingleProduct(id) {
     data,
     isLoading: !error && !data,
     isError: error,
+  };
+}
+
+export function useCurrentUser(id) {
+  const { data, error, mutate } = useSWR(`/api/users/showMe`, {
+    revalidateOnFocus: false,
+    revalidateOnMount: false,
+    revalidateOnReconnect: false,
+    refreshWhenOffline: false,
+    refreshWhenHidden: false,
+    refreshInterval: 0,
+  });
+  return {
+    loggedInUser: data ? (data.user ? data.user.name : undefined) : data,
+    // role: data ? data.user.role : data,
+    isLoading: !error && !data,
+    isError: error,
+    mutate,
   };
 }

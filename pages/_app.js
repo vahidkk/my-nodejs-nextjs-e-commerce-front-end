@@ -3,6 +3,7 @@ import "../public/main.css";
 import { SideBarProvider } from "../context/context";
 import { FilterProvider } from "../context/filter_context";
 import { CartProvider } from "../context/cart_context";
+import { UserProvider } from "../context/user_context";
 import axios from "axios";
 import { SWRConfig } from "swr";
 
@@ -24,9 +25,11 @@ function MyApp({ Component, pageProps }) {
       <SideBarProvider>
         <FilterProvider>
           <CartProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <UserProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </UserProvider>
           </CartProvider>
         </FilterProvider>
       </SideBarProvider>
