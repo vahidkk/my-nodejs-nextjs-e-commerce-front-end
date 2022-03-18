@@ -6,9 +6,12 @@ import Link from "next/link";
 import { links } from "../utils/constants";
 import CartButtons from "./CartButtons";
 import { useSideBarContext } from "../context/context";
+import { useCurrentUser } from "../utils/useSWR";
 
 const Nav = () => {
   const { openSidebar } = useSideBarContext();
+  const { loggedInUser } = useCurrentUser();
+  const { closeSidebar } = useSideBarContext();
 
   return (
     <NavContainer>
@@ -38,6 +41,11 @@ const Nav = () => {
               </li>
             );
           })}
+          {loggedInUser && (
+            <li>
+              <Link href="/user/user-dashboard">dashboard</Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </div>

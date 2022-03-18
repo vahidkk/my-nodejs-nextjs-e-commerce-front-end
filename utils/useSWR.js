@@ -30,7 +30,7 @@ export function useSingleProduct(id) {
 export function useCurrentUser(id) {
   const { data, error, mutate } = useSWR(`/api/users/showMe`, {
     revalidateOnFocus: false,
-    revalidateOnMount: false,
+    revalidateOnMount: true,
     revalidateOnReconnect: false,
     refreshWhenOffline: false,
     refreshWhenHidden: false,

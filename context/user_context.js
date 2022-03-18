@@ -5,6 +5,10 @@ import {
   REGISTER_USER_SUCCESS,
   REGISTER_USER_ERROR,
   LOGIN_USER_SUCCESS,
+  CHANGENAME_USER_ERROR,
+  CHANGENAME_USER_SUCCESS,
+  CHANGEPASSWORD_USER_ERROR,
+  CHANGEPASSWORD_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_USER,
 } from "../actions";
@@ -38,6 +42,36 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  // change name
+  const changeName = async (userInput) => {
+    setLoading();
+    try {
+      const { data } = await axios.patch(`/api/users/updateUser`, {
+        ...userInput,
+      });
+
+      dispatch({ type: CHANGENAME_USER_SUCCESS, payload: data.user });
+    } catch (error) {
+      dispatch({ type: CHANGENAME_USER_ERROR, payload: error.response.data });
+    }
+  };
+  // change pass
+  const changePassword = async (userInput) => {
+    setLoading();
+    try {
+      const { data } = await axios.patch(`/api/users/updateUserPassword`, {
+        ...userInput,
+      });
+
+      dispatch({ type: CHANGEPASSWORD_USER_SUCCESS, payload: data.user });
+    } catch (error) {
+      dispatch({
+        type: CHANGEPASSWORD_USER_ERROR,
+        payload: error.response.data,
+      });
+    }
+  };
+
   // login
   const login = async (userInput) => {
     setLoading();
@@ -64,6 +98,8 @@ const UserProvider = ({ children }) => {
         register,
         login,
         logout,
+        changeName,
+        changePassword,
       }}
     >
       {children}

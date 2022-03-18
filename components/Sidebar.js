@@ -6,10 +6,12 @@ import styled from "styled-components";
 import CartButtons from "./CartButtons";
 import { X } from "react-feather";
 import { useSideBarContext } from "../context/context";
+import { useCurrentUser } from "../utils/useSWR";
 
 const Sidebar = () => {
-  const myUser = true;
   const { isSidebarOpen, closeSidebar } = useSideBarContext();
+  const { loggedInUser } = useCurrentUser();
+
   return (
     <SidebarContainer>
       <aside
@@ -32,18 +34,14 @@ const Sidebar = () => {
         <ul className="links">
           {links.map(({ id, text, url }) => {
             return (
-              <li key={id}>
-                <Link href={url} onClick={closeSidebar}>
-                  {text}
-                </Link>
+              <li key={id} onClick={closeSidebar}>
+                <Link href={url}>{text}</Link>
               </li>
             );
           })}
-          {myUser && (
-            <li>
-              <Link href="/checkout" onClick={closeSidebar}>
-                checkout
-              </Link>
+          {loggedInUser && (
+            <li onClick={closeSidebar}>
+              <Link href="/user/user-dashboard">dashboard</Link>
             </li>
           )}
         </ul>

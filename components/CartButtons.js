@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { UserPlus, UserMinus, ShoppingCart } from "react-feather";
 import Link from "next/link";
 import { useCurrentUser } from "../utils/useSWR";
@@ -5,7 +6,6 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useSideBarContext } from "../context/context";
 import { useCartContext } from "../context/cart_context";
-import { useUserContext } from "../context/user_context";
 import axios from "axios";
 
 const CartButtons = () => {
@@ -13,8 +13,6 @@ const CartButtons = () => {
   const { total_items, clearCart } = useCartContext();
   const { loggedInUser, mutate } = useCurrentUser();
   const router = useRouter();
-  const { user, logout } = useUserContext();
-
   const logoutHandler = async () => {
     try {
       const res = await axios.get("/api/auth/logout");
@@ -23,14 +21,21 @@ const CartButtons = () => {
       throw err;
     }
   };
+
   return (
-    <Wrapper className="cart-btn-wrapper">
-      <span href="/cart" className="cart-btn1" onClick={closeSidebar}>
-        Cart
-        <span className="cart-container">
-          <ShoppingCart />
-          <span className="cart-value">{total_items}</span>
-        </span>
+    <Wrapper className="cart-btn-wrapper" onClick={closeSidebar}>
+      <span href="/cart" className="cart-btn1">
+        <button
+          type="button"
+          className="auth-btn"
+          onClick={() => router.push("/cart")}
+        >
+          Cart
+          <span className="cart-container">
+            <ShoppingCart />
+            <span className="cart-value">{total_items}</span>
+          </span>
+        </button>
       </span>
 
       {loggedInUser ? (

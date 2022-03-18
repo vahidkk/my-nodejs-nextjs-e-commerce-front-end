@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, createContext } from "react";
+import { useContext, useReducer, createContext } from "react";
 import reducer from "../reducers/reducer";
 import { SIDEBAR_OPEN, SIDEBAR_CLOSE } from "../actions";
 
@@ -17,9 +17,6 @@ export const SideBarProvider = ({ children }) => {
   const closeSidebar = () => {
     dispatch({ type: SIDEBAR_CLOSE });
   };
-  useEffect(() => {
-    openSidebar();
-  }, []);
 
   return (
     <SideBarContext.Provider value={{ ...state, openSidebar, closeSidebar }}>

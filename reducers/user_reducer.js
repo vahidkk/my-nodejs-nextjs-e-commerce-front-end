@@ -3,7 +3,11 @@ import {
   REGISTER_USER_SUCCESS,
   REGISTER_USER_ERROR,
   LOGIN_USER_SUCCESS,
+  CHANGENAME_USER_SUCCESS,
+  CHANGEPASSWORD_USER_SUCCESS,
   LOGIN_USER_ERROR,
+  CHANGENAME_USER_ERROR,
+  CHANGEPASSWORD_USER_ERROR,
   LOGOUT_USER,
   SET_USER,
 } from "../actions";
@@ -29,6 +33,23 @@ const user_reducer = (state, action) => {
       userId: action.payload.id,
     };
   }
+  if (action.type === CHANGENAME_USER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      user: action.payload.name,
+      userId: action.payload.id,
+    };
+  }
+  if (action.type === CHANGEPASSWORD_USER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      // user: action.payload.name,
+      // userId: action.payload.id,
+      passwordChanged: true,
+    };
+  }
   if (action.type === REGISTER_USER_ERROR) {
     return {
       ...state,
@@ -42,6 +63,22 @@ const user_reducer = (state, action) => {
       ...state,
       isLoading: false,
       user: null,
+      showAlert: action.payload,
+    };
+  }
+  if (action.type === CHANGENAME_USER_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      // user: null,
+      showAlert: action.payload,
+    };
+  }
+  if (action.type === CHANGEPASSWORD_USER_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      passwordChanged: false,
       showAlert: action.payload,
     };
   }

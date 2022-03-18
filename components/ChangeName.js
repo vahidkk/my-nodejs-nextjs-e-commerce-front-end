@@ -6,29 +6,27 @@ import Link from "next/link";
 import { useCurrentUser } from "../utils/useSWR";
 import { useRouter } from "next/router";
 
-function Register() {
+function ChangeName() {
   const [values, setValues] = useState({
     name: "",
     email: "",
-    password: "",
   });
 
-  const { user, register, isLoading, showAlert } = useUserContext();
+  const { user, changeName, isLoading, showAlert } = useUserContext();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password } = values;
-    register({ name, email, password });
+    const { name, email } = values;
+    changeName({ name, email });
   };
   const router = useRouter();
-  const { loggedInUser, mutate } = useCurrentUser();
+  const { loggedInUser } = useCurrentUser();
   useEffect(() => {
-    loggedInUser && router.push("/");
+    !loggedInUser && router.push("/");
   }, []);
-  useEffect(() => mutate(), [user]);
 
   return (
     <>
@@ -36,54 +34,42 @@ function Register() {
         <div className="container">
           <form className="form" onSubmit={onSubmit}>
             <FormRow
-              type="name"
-              name="name"
-              value={values.name}
-              handleChange={handleChange}
-            />
-
-            <FormRow
               type="email"
               name="email"
               value={values.email}
               handleChange={handleChange}
+              placeholder={"Your Email"}
             />
 
             <FormRow
-              type="password"
-              name="password"
-              value={values.password}
+              type="name"
+              name="name"
+              value={values.name}
               handleChange={handleChange}
+              placeholder={"New Name"}
             />
 
             <button type="submit" className="btn " disabled={isLoading || user}>
-              {isLoading ? "Fetching..." : "Register"}
+              {isLoading ? "changing..." : "change"}
             </button>
             <br />
             <br />
             {showAlert && (
-              <div className="alert alert-danger">
-                {console.log("&&&&&& error:", showAlert)}
-                Error : {showAlert.msg}
-              </div>
+              <div className="alert alert-danger">Error : {showAlert.msg}</div>
             )}
 
             {user && (
               <div className="alert alert-success">
-                You have successfully registered and logged-in. <br />
+                You have successfully change your name to :{" "}
+                <b>
+                  <u>{user}</u>
+                </b>
+                <br />
                 <Link href="/">
-                  <a className="btn ">Shop Now !</a>
+                  <a className="btn ">Back to homepage</a>
                 </Link>
               </div>
             )}
-
-            <p>
-              {!user && (
-                <>
-                  Already a member?<Link href="/login">Log in</Link>
-                </>
-              )}
-            </p>
           </form>
         </div>
       </Wrapper>
@@ -122,4 +108,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default Register;
+export default ChangeName;
