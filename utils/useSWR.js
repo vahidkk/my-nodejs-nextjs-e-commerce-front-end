@@ -38,6 +38,7 @@ export function useCurrentUser(id) {
   });
   return {
     loggedInUser: data ? (data.user ? data.user.name : undefined) : data,
+    loggedInUserID: data ? (data.user ? data.user._id : undefined) : data,
     // role: data ? data.user.role : data,
     isLoading: !error && !data,
     isError: error,
