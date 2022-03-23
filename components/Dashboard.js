@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useUserContext } from "../context/user_context";
-import FormRow from "./FormRow";
-import Link from "next/link";
 import { useCurrentUser } from "../utils/useSWR";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 function Dashboard() {
   const { user, isLoading, logout } = useUserContext();
@@ -14,10 +13,8 @@ function Dashboard() {
   const logoutHandler = async () => {
     try {
       const res = await axios.get("/api/auth/logout");
-      res.status === 200 &&
-        mutate({ loggedInUser: null }) &&
-        logout() &&
-        router.push("/login");
+      res.status === 200 && mutate({ loggedInUser: null }) && logout();
+      router.push("/login");
     } catch (err) {
       throw err;
     }
@@ -31,7 +28,15 @@ function Dashboard() {
     <>
       <Wrapper className="page full-page">
         <div className="container">
-          <h3>Welcome {user} !</h3>
+          <h3>Welcome {loggedInUser} !</h3>
+          <button
+            type="submit"
+            className="btn "
+            onClick={() => router.push("/user/orders-history")}
+          >
+            Orders history
+          </button>
+          <br />
           <button
             type="submit"
             className="btn "

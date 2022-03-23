@@ -1,51 +1,38 @@
 import styled from "styled-components";
+import { useEffect } from "react";
 import { formatPrice } from "../utils/helpers";
-import AmountButtons from "./AmountButtons";
-import { FaTrash } from "react-icons/fa";
-import { useCartContext } from "../context/cart_context";
-import Image from "next/image";
+import { MdPendingActions, MdFactCheck, MdSmsFailed } from "react-icons/md";
+import Link from "next/link";
+import moment from "moment";
+import { useCurrentUser } from "../utils/useSWR";
+import { useRouter } from "next/router";
 
-const CartItem = ({ id, image, name, color, price, amount, orderHistory }) => {
-  const { removeItem, toggleAmount } = useCartContext();
-  image = Array.isArray(image) ? image[0] : image;
-  const increase = () => {
-    toggleAmount(id, "inc");
-  };
-  const decrease = () => {
-    toggleAmount(id, "dec");
-  };
+const OrdersList = ({ _id: order, total, status, createdAt }) => {
+  const { loggedInUser } = useCurrentUser();
+  const router = useRouter();
+  useEffect(() => !loggedInUser && router.push("/"), []);
+
   return (
     <Wrapper>
-      <div className="title">
-        <Image height="100%" width="100%" src={image} alt={name} />
+      <div className="order">
         <div>
-          <h5 className="name">{name}</h5>
-          <p className="color">
-            color : <span style={{ background: color }}></span>
-          </p>
-          <h5 className="price-small">{formatPrice(price)}</h5>
+          <h5 className="name">
+            <Link href={`order?number=${order}`}>{order}</Link>
+          </h5>
         </div>
       </div>
-      <h5 className="price">{formatPrice(price)}</h5>
-      {orderHistory ? (
-        <h5 className="price">{amount}</h5>
-      ) : (
-        <AmountButtons
-          amount={amount}
-          increase={increase}
-          decrease={decrease}
-        />
-      )}
-      <h5 className="subtotal">{formatPrice(price * amount)}</h5>
-      {!orderHistory && (
-        <button
-          type="button"
-          className="remove-btn"
-          onClick={() => removeItem(id)}
-        >
-          <FaTrash />
-        </button>
-      )}
+      <h5 className="total">{moment(createdAt).utc().format("DD/MM/YY")}</h5>
+      <h5 className="total">{formatPrice(total)}</h5>
+      <h5 className="total">{status}</h5>
+      <h4>
+        {status === "pending" ? (
+          <MdPendingActions />
+        ) : status === "paid" ? (
+          <MdFactCheck />
+        ) : (
+          <MdSmsFailed />
+        )}
+      </h4>
     </Wrapper>
   );
 };
@@ -54,7 +41,7 @@ const Wrapper = styled.article`
   .subtotal {
     display: none;
   }
-  .price {
+  .total {
     display: none;
   }
   display: grid;
@@ -64,7 +51,7 @@ const Wrapper = styled.article`
   justify-items: center;
   margin-bottom: 3rem;
   align-items: center;
-  .title {
+  .order {
     height: 100%;
     display: grid;
     grid-template-columns: 75px 125px;
@@ -102,7 +89,7 @@ const Wrapper = styled.article`
       border-radius: var(--radius);
     }
   }
-  .price-small {
+  .total-small {
     color: var(--clr-primary-5);
   }
   .amount-btns {
@@ -139,10 +126,10 @@ const Wrapper = styled.article`
       font-weight: 400;
       font-size: 1rem;
     }
-    .price-small {
+    .total-small {
       display: none;
     }
-    .price {
+    .total {
       display: block;
       font-size: 1rem;
       color: var(--clr-primary-5);
@@ -164,7 +151,7 @@ const Wrapper = styled.article`
     img {
       height: 100%;
     }
-    .title {
+    .order {
       height: 100%;
       display: grid;
       grid-template-columns: 100px 200px;
@@ -186,4 +173,4 @@ const Wrapper = styled.article`
   }
 `;
 
-export default CartItem;
+export default OrdersList;

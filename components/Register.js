@@ -28,7 +28,11 @@ function Register() {
   useEffect(() => {
     loggedInUser && router.push("/");
   }, []);
-  useEffect(() => mutate(), [user]);
+
+  useEffect(() => {
+    mutate();
+    router.query.next === "checkout" && user && router.push("/checkout");
+  }, [user]);
 
   return (
     <>
@@ -62,10 +66,7 @@ function Register() {
             <br />
             <br />
             {showAlert && (
-              <div className="alert alert-danger">
-                {console.log("&&&&&& error:", showAlert)}
-                Error : {showAlert.msg}
-              </div>
+              <div className="alert alert-danger">Error : {showAlert.msg}</div>
             )}
 
             {user && (

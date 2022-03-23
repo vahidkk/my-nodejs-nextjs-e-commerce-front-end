@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { UserPlus, UserMinus, ShoppingCart } from "react-feather";
 import Link from "next/link";
 import { useCurrentUser } from "../utils/useSWR";
@@ -6,11 +5,14 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useSideBarContext } from "../context/context";
 import { useCartContext } from "../context/cart_context";
+import { useUserContext } from "../context/user_context";
+
 import axios from "axios";
 
 const CartButtons = () => {
   const { closeSidebar } = useSideBarContext();
   const { total_items, clearCart } = useCartContext();
+  const { logout } = useUserContext();
   const { loggedInUser, mutate } = useCurrentUser();
   const router = useRouter();
   const logoutHandler = async () => {

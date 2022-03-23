@@ -3,31 +3,50 @@ import { useCartContext } from "../context/cart_context";
 import Link from "next/link";
 import CartColumns from "./CartColumns";
 import CartItem from "./CartItem";
+import Error from "./Error";
 import CartTotals from "./CartTotals";
+import moment from "moment";
 
-const CartContent = () => {
-  const { cart, clearCart } = useCartContext();
+const CartContent = ({ data }) => {
+  const { cart: cartContext, clearCart } = useCartContext();
+  const cartHistory = data ? data.order.orderItems : undefined;
   return (
     <Wrapper className="section section-center">
       <CartColumns />
-      {cart.map((item) => {
-        console.log("ittttttem:", item);
-        return <CartItem key={item.id} {...item} />;
-      })}
+      {cartHistory || cartContext ? (
+        (cartHistory ? cartHistory : cartContext).map((item) => {
+          return (
+            <CartItem
+              key={item.id}
+              {...item}
+              orderHistory={data ? true : false}
+            />
+          );
+        })
+      ) : (
+        <Error />
+      )}
       <hr />
       <div className="link-container">
-        <Link href="/products" className="link-btn">
-          continue shopping
+        <Link href={data ? "/user/orders-history" : "/products"}>
+          <p className="link-btn">
+            {data ? "back to orders history" : "continue shopping"}
+          </p>
         </Link>
-        <button
-          type="button"
-          className="link-btn clear-btn"
-          onClick={clearCart}
-        >
-          clear shopping cart
-        </button>
+        {!data ? (
+          <button type="button" className="link-btn " onClick={clearCart}>
+            clear shopping cart
+          </button>
+        ) : (
+          <>
+            <h4>order status : {data.order.status}</h4>
+            <h4>
+              created : {moment(data.order.createdAt).utc().format("DD/MM/YY")}
+            </h4>
+          </>
+        )}
       </div>
-      <CartTotals />
+      <CartTotals data={data ? data.order : null} />
     </Wrapper>
   );
 };

@@ -63,7 +63,6 @@ const AddToCart = ({ product }) => {
         <p
           className="btn"
           onClick={() => {
-            console.log("JUST");
             addToCart(id, mainColor, amount, product);
             router.push("/cart");
           }}

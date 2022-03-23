@@ -24,7 +24,10 @@ function Login() {
     login({ email, password });
   };
   useEffect(() => loggedInUser && router.push("/"), []);
-  useEffect(() => mutate(), [user]);
+  useEffect(() => {
+    mutate();
+    router.query.next === "checkout" && user && router.push("/checkout");
+  }, [user]);
   return (
     <>
       <Wrapper className="page full-page">
@@ -58,7 +61,6 @@ function Login() {
 
             {user && (
               <div className="alert alert-success">
-                {console.log("userrrrrr:", user)}
                 You have successfully logged-in! <br />
                 <Link href="/">
                   <a className="btn ">Shop Now !</a>
@@ -68,7 +70,16 @@ function Login() {
             <p>
               {!user && (
                 <>
-                  Not a member yet? <Link href="/register"> Register</Link>
+                  Not a member yet?{" "}
+                  <Link
+                    href={
+                      router.query.next === "checkout"
+                        ? "/register?next=checkout"
+                        : "/register"
+                    }
+                  >
+                    Register
+                  </Link>
                 </>
               )}
             </p>
