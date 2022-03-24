@@ -78,7 +78,7 @@ function Login() {
                         : "/register"
                     }
                   >
-                    Register
+                    <a>Register</a>
                   </Link>
                 </>
               )}

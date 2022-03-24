@@ -7,13 +7,22 @@ const Product = ({ image, name, price, id }) => {
   return (
     <Wrapper>
       <div className="container">
-        <Image height={225} width={300} src={image[0]} alt={name} />
         <Link href={`/product/${id}`} className="link">
-          click
+          <Image
+            height={225}
+            width={300}
+            src={Array.isArray(image) ? image[0] : image}
+            alt={name}
+            className="img"
+          />
         </Link>
       </div>
       <footer>
-        <h5>{name}</h5>
+        <Link href={`/product/${id}`} className="link">
+          <h5>
+            <b>{name}</b>
+          </h5>
+        </Link>
         <p>{formatPrice(price)}</p>
       </footer>
     </Wrapper>
@@ -26,12 +35,13 @@ const Wrapper = styled.article`
     background: var(--clr-black);
     border-radius: var(--radius);
   }
-  img {
+  .img {
     width: 100%;
     display: block;
     object-fit: cover;
     border-radius: var(--radius);
     transition: var(--transition);
+    cursor: pointer;
   }
   .link {
     position: absolute;
@@ -53,6 +63,9 @@ const Wrapper = styled.article`
       color: var(--clr-white);
     }
   }
+  h5 {
+    cursor: pointer;
+  }
   .container:hover img {
     opacity: 0.5;
   }
@@ -69,10 +82,7 @@ const Wrapper = styled.article`
   footer p {
     margin-bottom: 0;
     font-weight: 400;
-  }
-
-  footer p {
-    color: var(--clr-primary-5);
+    color: var(--clr-grey-2);
     letter-spacing: var(--spacing);
   }
 `;

@@ -11,6 +11,7 @@ import {
   CHANGEPASSWORD_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_USER,
+  USER_SUCCEEDED_STATE_FALSE,
 } from "../actions";
 import user_reducer from "../reducers/user_reducer";
 
@@ -18,6 +19,8 @@ const initialState = {
   user: null,
   isLoading: false,
   showAlert: false,
+  userNameChanged: false,
+  passwordChanged: false,
 };
 const UserContext = createContext();
 
@@ -90,6 +93,11 @@ const UserProvider = ({ children }) => {
     dispatch({ type: LOGOUT_USER });
   };
 
+  //make nameChanged nad passwordChanged success state FALSE to be able to do it again if user needed.
+  const makeSucceededChangesFalse = () => {
+    dispatch({ type: USER_SUCCEEDED_STATE_FALSE });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -100,6 +108,7 @@ const UserProvider = ({ children }) => {
         logout,
         changeName,
         changePassword,
+        makeSucceededChangesFalse,
       }}
     >
       {children}

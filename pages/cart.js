@@ -3,12 +3,16 @@ import { useCartContext } from "../context/cart_context";
 import Link from "next/link";
 import PageHero from "../components/PageHero";
 import CartContent from "../components/CartContent";
+import Head from "next/head";
 
 const CartPage = () => {
   const { cart } = useCartContext();
   if (!cart || cart.length < 1) {
     return (
       <Wrapper className="page-100">
+        <Head>
+          <title>Lets Go Shopping ! - Register </title>
+        </Head>
         <div className="empty">
           <h2>
             <br />

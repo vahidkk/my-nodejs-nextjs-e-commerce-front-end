@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import heroBcg from "../public/letsgoshopping.png";
-import heroBcg2 from "../public/letsgoshopping.png";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,10 +7,10 @@ const Hero = () => {
   return (
     <Wrapper className="section-center">
       <article className="content">
-        <h1>
+        <h2>
           Buy <br />
           High quality products
-        </h1>
+        </h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti iure
           quasi odit tenetur unde officiis repudiandae quod deserunt quia eum?
@@ -22,7 +21,6 @@ const Hero = () => {
       </article>
       <article className="img-container">
         <Image src={heroBcg} alt="vahid" className="main-img" />
-        <Image src={heroBcg2} alt="vahid" className="accent-img" />
       </article>
     </Wrapper>
   );
@@ -69,24 +67,6 @@ const Wrapper = styled.section`
       display: block;
       object-fit: cover;
     }
-    .accent-img {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 250px;
-      transform: translateX(-50%);
-      border-radius: var(--radius);
-    }
-    /* .img-container::before {
-      content: "";
-      position: absolute;
-      width: 10%;
-      height: 80%;
-      background: var(--clr-primary-9);
-      bottom: 0%;
-      left: -8%;
-      border-radius: var(--radius);
-    } */
   }
 `;
 

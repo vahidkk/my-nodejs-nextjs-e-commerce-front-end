@@ -22,7 +22,7 @@ function Dashboard() {
   useEffect(() => {
     !loggedInUser && router.push("/");
   }, []);
-  useEffect(() => mutate(), [user]);
+  // useEffect(() => mutate(), [user]);
 
   return (
     <>

@@ -26,7 +26,7 @@ const CartButtons = () => {
 
   return (
     <Wrapper className="cart-btn-wrapper" onClick={closeSidebar}>
-      <span href="/cart" className="cart-btn1">
+      <span href="/cart" className="cart-btn1 vertical-shake">
         <button
           type="button"
           className="auth-btn"
@@ -39,22 +39,23 @@ const CartButtons = () => {
           </span>
         </button>
       </span>
-
-      {loggedInUser ? (
-        <button type="button" className="auth-btn" onClick={logoutHandler}>
-          Logout
-          <UserMinus />
-        </button>
-      ) : (
-        <button
-          type="button"
-          className="auth-btn"
-          onClick={() => router.push("/login")}
-        >
-          Login
-          <UserPlus />
-        </button>
-      )}
+      <span className="vertical-shake">
+        {loggedInUser ? (
+          <button type="button" className="auth-btn" onClick={logoutHandler}>
+            Logout
+            <UserMinus />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="auth-btn"
+            onClick={() => router.push("/login")}
+          >
+            Login
+            <UserPlus />
+          </button>
+        )}
+      </span>
     </Wrapper>
   );
 };

@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import PageHero from "../../components/PageHero";
 import OrdersHistory from "../../components/OrdersHistory";
+import Head from "next/head";
+
 const MyOrdersHistory = () => {
   return (
     <main>
+      <Head>
+        <title>Lets Go Shopping ! - Orders History </title>
+      </Head>
       <PageHero title="Change Password" />
       <Wrapper className="page section section-center">
         <article>

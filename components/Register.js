@@ -81,7 +81,10 @@ function Register() {
             <p>
               {!user && (
                 <>
-                  Already a member?<Link href="/login">Log in</Link>
+                  Already a member ?{" "}
+                  <Link href="/login">
+                    <a>Log in</a>
+                  </Link>
                 </>
               )}
             </p>

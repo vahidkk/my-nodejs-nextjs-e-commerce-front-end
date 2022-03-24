@@ -3,11 +3,15 @@ import Link from "next/link";
 import PageHero from "../components/PageHero";
 import StripeCheckout from "../components/StripeCheckout";
 import { useCartContext } from "../context/cart_context";
+import Head from "next/head";
 
 const CheckoutPage = () => {
   const { cart } = useCartContext();
   return (
     <main>
+      <Head>
+        <title>Lets Go Shopping ! - Checkout </title>
+      </Head>
       <PageHero title="checkout" />
       <Wrapper className="page">
         {!cart || cart.length < 1 ? (

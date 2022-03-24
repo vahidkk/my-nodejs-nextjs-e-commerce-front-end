@@ -29,12 +29,12 @@ const CartContent = ({ data }) => {
       <hr />
       <div className="link-container">
         <Link href={data ? "/user/orders-history" : "/products"}>
-          <p className="link-btn">
+          <p className="btn">
             {data ? "back to orders history" : "continue shopping"}
           </p>
         </Link>
         {!data ? (
-          <button type="button" className="link-btn " onClick={clearCart}>
+          <button type="button" className="btn " onClick={clearCart}>
             clear shopping cart
           </button>
         ) : (
@@ -56,21 +56,6 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
-  }
-  .link-btn {
-    background: transparent;
-    border-color: transparent;
-    text-transform: capitalize;
-    padding: 0.25rem 0.5rem;
-    background: var(--clr-primary-5);
-    color: var(--clr-white);
-    border-radius: var(--radius);
-    letter-spacing: var(--spacing);
-    font-weight: 400;
-    cursor: pointer;
-  }
-  .clear-btn {
-    background: var(--clr-black);
   }
 `;
 export default CartContent;

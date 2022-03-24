@@ -61,8 +61,9 @@ const CheckoutForm = () => {
       });
       setClientSecret(data.clientSecret);
       return true;
-    } catch (error) {
-      // console.log(error.response)
+    } catch (err) {
+      setError(err.response.data);
+      setDisabled(true);
     }
   };
   const postOrderToBackEnd = async (orderStatus) => {
@@ -81,8 +82,9 @@ const CheckoutForm = () => {
         data.order.total === total_amount + shipping_fee + data.order.tax
       );
       setIntentId(data.order._id);
-    } catch (error) {
-      // console.log(error.response)
+    } catch (err) {
+      setError(err.response.data);
+      setDisabled(true);
     }
   };
   const patchOrderBackEnd = async (orderStatus) => {
@@ -91,7 +93,7 @@ const CheckoutForm = () => {
         paymentIntentId: intentId,
         status: orderStatus,
       });
-    } catch (error) {
+    } catch (err) {
       // console.log(error.response)
     }
   };
@@ -141,14 +143,15 @@ const CheckoutForm = () => {
         <article>
           <br />
           <br />
-          <h4>Hello, {loggedInUser && loggedInUser}</h4>
-          <p>
+          <h3>Hello, {loggedInUser && loggedInUser}</h3>
+          <br />
+          <h4>
             Your cart's total amount is :
-            {formatPrice(shipping_fee + total_amount)}
+            <b> {formatPrice(shipping_fee + total_amount)}</b>
             {isTotalAmountTrue === false &&
               "It seems that your cart total price is not matching with our calculation. Please contact our support team."}
-          </p>
-          <p>(test Card Number : 4242 4242 4242 4242)</p>
+          </h4>
+          <p className="test-card">(test Card Number : 4242 4242 4242 4242)</p>
         </article>
       )}
       <form id="payment-form" onSubmit={handleSubmit}>
@@ -171,6 +174,7 @@ const CheckoutForm = () => {
           </div>
         )}
         <p className={succeeded ? "result-message" : "result-message hidden"}>
+          <br />
           Payment succedded !
         </p>
       </form>
@@ -198,6 +202,9 @@ const Wrapper = styled.section`
     border-radius: 7px;
     padding: 40px;
   }
+  .test-card {
+    color: var(--clr-grey-5);
+  }
   input {
     border-radius: 6px;
     margin-bottom: 6px;
@@ -210,6 +217,7 @@ const Wrapper = styled.section`
     box-sizing: border-box;
   }
   .result-message {
+    text-align: center;
     line-height: 22px;
     font-size: 16px;
   }
@@ -241,7 +249,7 @@ const Wrapper = styled.section`
     margin-bottom: 32px;
   }
   button {
-    background: #5469d4;
+    background: var(--clr-primary-2);
     font-family: Arial, sans-serif;
     color: #ffffff;
     border-radius: 0 0 4px 4px;
@@ -288,7 +296,7 @@ const Wrapper = styled.section`
   .spinner:before {
     width: 10.4px;
     height: 20.4px;
-    background: #5469d4;
+    background: var(--clr-primary-2);
     border-radius: 20.4px 0 0 20.4px;
     top: -0.2px;
     left: -0.2px;
@@ -300,7 +308,7 @@ const Wrapper = styled.section`
   .spinner:after {
     width: 10.4px;
     height: 10.2px;
-    background: #5469d4;
+    background: var(--clr-primary-2);
     border-radius: 0 10.2px 10.2px 0;
     top: -0.1px;
     left: 10.2px;
@@ -319,7 +327,12 @@ const Wrapper = styled.section`
       transform: rotate(360deg);
     }
   }
-  @media only screen and (max-width: 600px) {
+  @media (max-width: 1200px) {
+    form {
+      width: 40vw;
+    }
+  }
+  @media (max-width: 700px) {
     form {
       width: 80vw;
     }

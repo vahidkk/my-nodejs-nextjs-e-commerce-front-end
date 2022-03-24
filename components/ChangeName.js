@@ -12,7 +12,14 @@ function ChangeName() {
     email: "",
   });
 
-  const { user, changeName, isLoading, showAlert } = useUserContext();
+  const {
+    user,
+    changeName,
+    isLoading,
+    showAlert,
+    userNameChanged,
+    makeSucceededChangesFalse,
+  } = useUserContext();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -26,6 +33,7 @@ function ChangeName() {
   const { loggedInUser } = useCurrentUser();
   useEffect(() => {
     !loggedInUser && router.push("/");
+    makeSucceededChangesFalse();
   }, []);
 
   return (
@@ -49,7 +57,11 @@ function ChangeName() {
               placeholder={"New Name"}
             />
 
-            <button type="submit" className="btn " disabled={isLoading || user}>
+            <button
+              type="submit"
+              className="btn "
+              disabled={isLoading || userNameChanged}
+            >
               {isLoading ? "changing..." : "change"}
             </button>
             <br />
@@ -58,9 +70,9 @@ function ChangeName() {
               <div className="alert alert-danger">Error : {showAlert.msg}</div>
             )}
 
-            {user && (
+            {userNameChanged && (
               <div className="alert alert-success">
-                You have successfully change your name to :{" "}
+                You have successfully changed your name to :{" "}
                 <b>
                   <u>{user}</u>
                 </b>

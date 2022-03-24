@@ -2,11 +2,14 @@ import styled from "styled-components";
 import PageHero from "../components/PageHero";
 import aboutImg from "../public/shopping-online.png";
 import Image from "next/image";
-
+import Head from "next/head";
 const AboutPage = () => {
   return (
     <main>
       <PageHero title="about" />
+      <Head>
+        <title>Lets Go Shopping ! - About</title>
+      </Head>
       <Wrapper className="page section section-center">
         <Image
           src={aboutImg}

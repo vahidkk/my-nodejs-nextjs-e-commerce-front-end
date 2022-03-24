@@ -3,9 +3,15 @@ import PageHero from "../../components/PageHero";
 import Dashboard from "../../components/Dashboard";
 import aboutImg from "../../public/shopping-online.png";
 import Image from "next/image";
+import Head from "next/head";
+
 const UserDashboard = () => {
   return (
     <main>
+      {" "}
+      <Head>
+        <title>Lets Go Shopping ! - Dashboard </title>
+      </Head>
       <PageHero title="Dashboard" />
       <Wrapper className="page section section-center">
         <Image

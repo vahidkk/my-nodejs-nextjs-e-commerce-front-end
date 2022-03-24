@@ -3,9 +3,13 @@ import PageHero from "../../components/PageHero";
 import aboutImg from "../../public/shopping-online.png";
 import Image from "next/image";
 import ChangePassword from "../../components/ChangePassword";
+
 const ChangeThePassword = () => {
   return (
     <main>
+      <Head>
+        <title>Lets Go Shopping ! - Change Password </title>
+      </Head>
       <PageHero title="Change Password" />
       <Wrapper className="page section section-center">
         <Image

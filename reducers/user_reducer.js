@@ -10,6 +10,7 @@ import {
   CHANGEPASSWORD_USER_ERROR,
   LOGOUT_USER,
   SET_USER,
+  USER_SUCCEEDED_STATE_FALSE,
 } from "../actions";
 
 const user_reducer = (state, action) => {
@@ -39,6 +40,7 @@ const user_reducer = (state, action) => {
       isLoading: false,
       user: action.payload.name,
       userId: action.payload.id,
+      userNameChanged: true,
     };
   }
   if (action.type === CHANGEPASSWORD_USER_SUCCESS) {
@@ -72,6 +74,7 @@ const user_reducer = (state, action) => {
       isLoading: false,
       // user: null,
       showAlert: action.payload,
+      userNameChanged: false,
     };
   }
   if (action.type === CHANGEPASSWORD_USER_ERROR) {
@@ -80,6 +83,7 @@ const user_reducer = (state, action) => {
       isLoading: false,
       passwordChanged: false,
       showAlert: action.payload,
+      passwordChanged: false,
     };
   }
 
@@ -95,6 +99,14 @@ const user_reducer = (state, action) => {
       ...state,
       user: null,
       userId: null,
+      showAlert: false,
+    };
+  }
+  if (action.type === USER_SUCCEEDED_STATE_FALSE) {
+    return {
+      ...state,
+      userNameChanged: false,
+      passwordChanged: false,
       showAlert: false,
     };
   }

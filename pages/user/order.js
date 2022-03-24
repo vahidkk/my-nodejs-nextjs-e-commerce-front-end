@@ -6,6 +6,7 @@ import CartContent from "../../components/CartContent";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Order = () => {
   const router = useRouter();
@@ -14,6 +15,9 @@ const Order = () => {
 
   return (
     <main>
+      <Head>
+        <title>Lets Go Shopping ! - Order </title>
+      </Head>
       <PageHero title={`order : ${data ? data.order._id : "history"}`} />
       <Wrapper className="page">
         {isLoading ? (

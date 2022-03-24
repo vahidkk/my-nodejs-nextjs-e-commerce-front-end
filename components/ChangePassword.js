@@ -12,8 +12,13 @@ function ChangePassword() {
     newPassword: "",
   });
 
-  const { passwordChanged, changePassword, isLoading, showAlert } =
-    useUserContext();
+  const {
+    passwordChanged,
+    makeSucceededChangesFalse,
+    changePassword,
+    isLoading,
+    showAlert,
+  } = useUserContext();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -27,6 +32,7 @@ function ChangePassword() {
   const { loggedInUser } = useCurrentUser();
   useEffect(() => {
     !loggedInUser && router.push("/");
+    makeSucceededChangesFalse();
   }, []);
   return (
     <>
@@ -63,7 +69,7 @@ function ChangePassword() {
 
             {passwordChanged && (
               <div className="alert alert-success">
-                You have successfully change your Password.
+                You have successfully changed your Password.
                 <br />
                 <Link href="/">
                   <a className="btn ">Back to homepage</a>

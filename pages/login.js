@@ -3,10 +3,15 @@ import PageHero from "../components/PageHero";
 import aboutImg from "../public/shopping-online.png";
 import Image from "next/image";
 import Login from "../components/Login";
+import Head from "next/head";
+
 const Login_page = () => {
   return (
     <main>
       <PageHero title="Login" />
+      <Head>
+        <title>Lets Go Shopping ! - Login </title>
+      </Head>
       <Wrapper className="page section section-center">
         <Image
           src={aboutImg}

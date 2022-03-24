@@ -1,7 +1,14 @@
 import useSWR from "swr";
 
 export function useAllProducts() {
-  const { data, error } = useSWR(`/api/products`);
+  const { data, error } = useSWR(`/api/products`, {
+    revalidateOnFocus: false,
+    revalidateOnMount: true,
+    revalidateOnReconnect: false,
+    refreshWhenOffline: false,
+    refreshWhenHidden: false,
+    refreshInterval: 0,
+  });
   const isFeatured = data
     ? data.products.map((i) => {
         if (!i.featured) return i;
@@ -16,7 +23,14 @@ export function useAllProducts() {
 }
 
 export function useSingleProduct(id) {
-  const { data, error } = useSWR(`/api/products/${id}`);
+  const { data, error } = useSWR(`/api/products/${id}`, {
+    revalidateOnFocus: false,
+    revalidateOnMount: true,
+    revalidateOnReconnect: false,
+    refreshWhenOffline: false,
+    refreshWhenHidden: false,
+    refreshInterval: 0,
+  });
 
   return {
     data,
@@ -25,7 +39,7 @@ export function useSingleProduct(id) {
   };
 }
 
-export function useCurrentUser(id) {
+export function useCurrentUser() {
   const { data, error, mutate } = useSWR(`/api/users/showMe`, {
     revalidateOnFocus: false,
     revalidateOnMount: true,

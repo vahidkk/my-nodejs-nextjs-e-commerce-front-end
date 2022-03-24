@@ -151,7 +151,6 @@ end of           colors
           {/* end of  shippping */}
         </form>
         <button type="button" className="clear-btn" onClick={clearFilters}>
-          {" "}
           clear filters
         </button>
       </div>
@@ -168,7 +167,7 @@ const Wrapper = styled.section`
   }
   .search-input {
     padding: 0.5rem;
-    background: var(--clr-grey-10);
+    background: var(--clr-primary-11);
     border-radius: var(--radius);
     border-color: transparent;
     letter-spacing: var(--spacing);
@@ -193,7 +192,7 @@ const Wrapper = styled.section`
     border-color: var(--clr-grey-5);
   }
   .company {
-    background: var(--clr-grey-10);
+    background: var(--clr-primary-11);
     border-radius: var(--radius);
     border-color: transparent;
     padding: 0.25rem;
@@ -245,11 +244,12 @@ const Wrapper = styled.section`
     font-size: 1rem;
   }
   .clear-btn {
-    background: var(--clr-red-dark);
+    background: var(--clr-primary-8);
     color: var(--clr-white);
     padding: 0.25rem 0.5rem;
     border-radius: var(--radius);
   }
+
   @media (min-width: 768px) {
     .content {
       position: sticky;

@@ -95,7 +95,7 @@ const Wrapper = styled.section`
       }
     }
     .active {
-      background: var(--clr-black);
+      background: var(--clr-grey-5);
       color: var(--clr-white);
     }
   }

@@ -9,6 +9,7 @@ import ProductImages from "../../components/ProductImages";
 import AddToCart from "../../components/AddToCart";
 import styled from "styled-components";
 import Link from "next/link";
+import Head from "next/head";
 
 const SingleProductPage = () => {
   const router = useRouter();
@@ -29,17 +30,20 @@ const SingleProductPage = () => {
     stars,
     reviews,
     company,
-    images,
+    image,
   } = data.product;
   return (
     <Wrapper>
+      <Head>
+        <title>{name} </title>
+      </Head>
       <PageHero title={name} product />
       <div className="section section-center page">
         <Link href="/products">
           <a className="btn">back to products</a>
         </Link>
         <div className=" product-center">
-          <ProductImages images={images} />
+          <ProductImages images={image} />
           <section className="content">
             <h2>{name}</h2>
             <Stars stars={stars} reviews={reviews} />
@@ -73,7 +77,7 @@ const Wrapper = styled.main`
     margin-top: 2rem;
   }
   .price {
-    color: var(--clr-primary-5);
+    color: var(--clr-grey-2);
   }
   .desc {
     line-height: 2;

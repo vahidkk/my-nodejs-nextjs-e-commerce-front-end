@@ -49,7 +49,7 @@ const Wrapper = styled.section`
   .submit-btn {
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border: 2px solid var(--clr-black);
+    border: 2px solid var(--clr-primary-5);
   }
   .form-input {
     border-right: none;
@@ -62,7 +62,7 @@ const Wrapper = styled.section`
     border-bottom-right-radius: var(--radius);
   }
   .form-input::placeholder {
-    color: var(--clr-black);
+    color: var(--clr-grey-5);
     text-transform: capitalize;
   }
   .submit-btn {
@@ -71,10 +71,10 @@ const Wrapper = styled.section`
     letter-spacing: var(--spacing);
     cursor: pointer;
     transition: var(--transition);
-    color: var(--clr-black);
+    color: var(--clr-primary-2);
   }
   .submit-btn:hover {
-    color: var(--clr-white);
+    color: var(--clr-primary-1);
   }
   @media (min-width: 992px) {
     .content {

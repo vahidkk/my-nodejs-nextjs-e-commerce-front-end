@@ -17,14 +17,16 @@ const OrdersList = ({ _id: order, total, status, createdAt }) => {
       <div className="order">
         <div>
           <h5 className="name">
-            <Link href={`order?number=${order}`}>{order}</Link>
+            <u>
+              <Link href={`order?number=${order}`}>{order}</Link>
+            </u>
           </h5>
         </div>
       </div>
       <h5 className="total">{moment(createdAt).utc().format("DD/MM/YY")}</h5>
       <h5 className="total">{formatPrice(total)}</h5>
       <h5 className="total">{status}</h5>
-      <h4>
+      <h4 className="total-icon">
         {status === "pending" ? (
           <MdPendingActions />
         ) : status === "paid" ? (
@@ -44,6 +46,13 @@ const Wrapper = styled.article`
   .total {
     display: none;
   }
+  .total-icon {
+    display: block;
+    font-size: 1.3rem;
+    color: var(--clr-primary-2);
+    font-weight: 400;
+    padding-top: 17px;
+  }
   display: grid;
   grid-template-columns: 200px auto auto;
   grid-template-rows: 75px;
@@ -59,38 +68,14 @@ const Wrapper = styled.article`
     text-align: left;
     gap: 1rem;
   }
-  img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: var(--radius);
-    object-fit: cover;
-  }
+
   h5 {
     font-size: 0.75rem;
     margin-bottom: 0;
   }
 
-  .color {
-    color: var(--clr-grey-5);
-    font-size: 0.75rem;
-    letter-spacing: var(--spacing);
-    text-transform: capitalize;
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    span {
-      display: inline-block;
-      width: 0.5rem;
-      height: 0.5rem;
-      background: red;
-      margin-left: 0.5rem;
-      border-radius: var(--radius);
-    }
-  }
   .total-small {
-    color: var(--clr-primary-5);
+    color: var(--clr-primary-2);
   }
   .amount-btns {
     width: 75px;
@@ -132,8 +117,15 @@ const Wrapper = styled.article`
     .total {
       display: block;
       font-size: 1rem;
-      color: var(--clr-primary-5);
+      color: var(--clr-primary-2);
       font-weight: 400;
+    }
+    .total-icon {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--clr-primary-2);
+      font-weight: 400;
+      padding-top: 17px;
     }
     .name {
       font-size: 0.85rem;
@@ -148,9 +140,7 @@ const Wrapper = styled.article`
     grid-template-columns: 1fr 1fr 1fr 1fr auto;
     align-items: center;
     grid-template-rows: 75px;
-    img {
-      height: 100%;
-    }
+
     .order {
       height: 100%;
       display: grid;

@@ -3,10 +3,14 @@ import ProductList from "../components/ProductList";
 import PageHero from "../components/PageHero";
 import Filters from "../components/Filters";
 import Sort from "../components/Sort";
+import Head from "next/head";
 
 const ProductsPage = () => {
   return (
     <main>
+      <Head>
+        <title>Lets Go Shopping ! - Products </title>
+      </Head>
       <PageHero title="products" />
       <Wrapper className="page">
         <div className="section-center products">

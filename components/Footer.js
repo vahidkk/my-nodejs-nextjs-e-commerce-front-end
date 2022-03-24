@@ -4,7 +4,7 @@ const Footer = () => {
     <Wrapper>
       <h5>
         &copy; {new Date().getFullYear()}
-        <span> LetsGoShopping</span>
+        <b> LetsGoShopping</b>
       </h5>
       <h5>All rights reserved</h5>
     </Wrapper>
@@ -17,10 +17,11 @@ const Wrapper = styled.footer`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--clr-grey-5);
+  background: var(--clr-primary-8);
+
   text-align: center;
   span {
-    color: var(--clr-primary-5);
+    color: var(--clr-primary-1);
   }
   h5 {
     color: var(--clr-white);

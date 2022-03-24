@@ -3,10 +3,15 @@ import PageHero from "../../components/PageHero";
 import ChangeName from "../../components/ChangeName";
 import aboutImg from "../../public/shopping-online.png";
 import Image from "next/image";
+import Head from "next/head";
+
 const ChangeTheName = () => {
   return (
     <main>
       <PageHero title="Change Name" />
+      <Head>
+        <title>Lets Go Shopping ! - Change Name </title>
+      </Head>
       <Wrapper className="page section section-center">
         <Image
           src={aboutImg}

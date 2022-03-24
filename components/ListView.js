@@ -10,20 +10,21 @@ const ListView = ({ products }) => {
         const { id, image, name, price, description } = product;
         return (
           <article key={id}>
-            <Image
-              width="300px"
-              height="200px"
-              className="list-view-img"
-              src={image}
-              alt={name}
-            />
+            <Link href={`/product/${id}`} className="btn">
+              <Image
+                width="300px"
+                height="200px"
+                className="list-view-img"
+                src={Array.isArray(image) ? image[0] : image}
+                alt={name}
+              />
+            </Link>
             <div>
-              <h4>{name}</h4>
+              <Link href={`/product/${id}`} className="btn">
+                <h4>{name}</h4>
+              </Link>
               <h5 className="price">{formatPrice(price)}</h5>
               <p>{description.substring(0, 150)}...</p>
-              <Link href={`/product/${id}`} className="btn">
-                Details
-              </Link>
             </div>
           </article>
         );
@@ -44,12 +45,14 @@ const Wrapper = styled.section`
     object-fit: cover;
     border-radius: var(--radius);
     margin-bottom: 1rem;
+    cursor: pointer;
   }
   h4 {
     margin-bottom: 0.5rem;
+    cursor: pointer;
   }
   .price {
-    color: var(--clr-primary-6);
+    color: var(--clr-grey-2);
     margin-bottom: 0.75rem;
   }
   p {

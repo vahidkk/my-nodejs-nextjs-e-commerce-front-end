@@ -1,36 +1,35 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import Loading from "./Loading";
 
-const ProductImages = ({
-  images = [
-    {
-      url: "https://res.cloudinary.com/waheeeed/image/upload/v1646850151/file-upload/tmp-1-1646850147576_x6txpv.png",
-    },
-  ],
-}) => {
+const ProductImages = ({ images }) => {
   const [main, setMain] = useState(images[0]);
+
   return (
     <Wrapper>
-      <Image
-        src={main.url}
-        alt="main image"
-        width="100%"
-        height="100%"
-        layout="responsive"
-        className="main-img"
-      />
+      {main ? (
+        <Image
+          src={main}
+          alt="main image"
+          width="100%"
+          height="100%"
+          layout="responsive"
+          className="main-img"
+        />
+      ) : (
+        <Loading />
+      )}
       <div className="gallery">
         {images.map((image, index) => {
           return (
             <Image
               height="100%"
               width="100%"
-              src={image.url}
-              alt={image.filename}
+              src={image}
               key={index}
               onClick={() => setMain(images[index])}
-              className={`${image.url === main.url ? "active" : null} pointer`}
+              className={`${image === main ? "active" : null} pointer`}
             />
           );
         })}
