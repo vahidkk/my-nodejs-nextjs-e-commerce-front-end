@@ -11,14 +11,18 @@ const Contact = () => {
             veniam repudiandae vel ab id, fuga praesentium nobis natus ipsam
             vero
           </p>
-          <form className="contact-form" action=" id" method="POST">
+          <form
+            className="contact-form"
+            // action=" id"
+            // method="POST"
+          >
             <input
-              type="email"
+              // type="email"
               className="form-input"
               placeholder="enter email"
               name="_replyto"
             />
-            <button type="submit" className="submit-btn">
+            <button type="submit" disabled={true} className="submit-btn">
               subscribe
             </button>
           </form>

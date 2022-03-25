@@ -9,11 +9,14 @@ export function useAllProducts() {
     refreshWhenHidden: false,
     refreshInterval: 0,
   });
-  const isFeatured = data
-    ? data.products.map((i) => {
-        if (!i.featured) return i;
-      })
-    : [];
+  const isFeatured = [];
+  data &&
+    data.products.map((i) => {
+      if (i.featured) {
+        isFeatured.push(i);
+      }
+    });
+
   return {
     data,
     isLoading: !error && !data,
