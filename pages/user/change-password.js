@@ -3,6 +3,7 @@ import PageHero from "../../components/PageHero";
 import aboutImg from "../../public/shopping-online.png";
 import Image from "next/image";
 import ChangePassword from "../../components/ChangePassword";
+import Head from "next/head";
 
 const ChangeThePassword = () => {
   return (

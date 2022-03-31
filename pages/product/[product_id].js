@@ -10,28 +10,14 @@ import AddToCart from "../../components/AddToCart";
 import styled from "styled-components";
 import Link from "next/link";
 import Head from "next/head";
+import { getPictures } from "../api/pictures";
 
-const SingleProductPage = () => {
+const SingleProductPage = ({ fetchedData }) => {
+  const { data, pictures } = fetchedData;
   const router = useRouter();
   const { product_id } = router.query;
-  const { data, isLoading, isError } = useSingleProduct(product_id);
-
-  if (isLoading) {
-    return <Loading />;
-  }
-  if (isError) {
-    return <Error />;
-  }
-  const {
-    name,
-    price,
-    description,
-    inventory,
-    stars,
-    reviews,
-    company,
-    image,
-  } = data.product;
+  const { name, price, description, inventory, stars, reviews, company } =
+    data.product;
   return (
     <Wrapper>
       <Head>
@@ -43,7 +29,7 @@ const SingleProductPage = () => {
           <a className="btn">back to products</a>
         </Link>
         <div className=" product-center">
-          <ProductImages images={image} />
+          <ProductImages images={pictures} />
           <section className="content">
             <h2>{name}</h2>
             <Stars stars={stars} reviews={reviews} />
@@ -51,7 +37,7 @@ const SingleProductPage = () => {
             <p className="desc"> {description}</p>
             <p className="info">
               <span>Available : </span>
-              {inventory > 0 ? "In stock" : "out of stock"}
+              {inventory > 0 ? `In stock (${inventory} left)` : "out of stock"}
             </p>
             <p className="info">
               <span>SKU : </span>
@@ -70,6 +56,29 @@ const SingleProductPage = () => {
   );
 };
 
+export async function getStaticPaths() {
+  const res = await fetch(process.env.MY_API_PRODUCTS_ROUTE);
+  const posts = await res.json();
+  const paths = posts.products.map((post) => ({
+    params: { product_id: post._id },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: blocking } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: "blocking" };
+}
+
+export async function getStaticProps(context) {
+  const res = await fetch(
+    process.env.MY_API_PRODUCTS_ROUTE + context.params.product_id
+  );
+  const data = await res.json();
+  const pictures = await getPictures(data.product.image);
+  console.log("data2", data);
+  const fetchedData = { data, pictures };
+  return { props: { fetchedData } };
+}
 const Wrapper = styled.main`
   .product-center {
     display: grid;

@@ -10,7 +10,9 @@ const ProductImages = ({ images }) => {
     <Wrapper>
       {main ? (
         <Image
-          src={main}
+          src={main.large}
+          placeholder="blur"
+          blurDataURL={`data:image/jpeg;base64,${main.small}`}
           alt="main image"
           width="100%"
           height="100%"
@@ -26,10 +28,12 @@ const ProductImages = ({ images }) => {
             <Image
               height="100%"
               width="100%"
-              src={image}
+              src={image.large}
+              placeholder="blur"
+              blurDataURL={`data:image/jpeg;base64,${image.small}`}
               key={index}
               onClick={() => setMain(images[index])}
-              className={`${image === main ? "active" : null} pointer`}
+              className={`${image === main.large ? "active" : null} pointer`}
             />
           );
         })}

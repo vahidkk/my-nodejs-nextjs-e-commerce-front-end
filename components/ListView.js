@@ -15,7 +15,9 @@ const ListView = ({ products }) => {
                 width="300px"
                 height="200px"
                 className="list-view-img"
-                src={Array.isArray(image) ? image[0] : image}
+                src={image[0].thumb}
+                placeholder="blur"
+                blurDataURL={`data:image/jpeg;base64,${image.small}`}
                 alt={name}
               />
             </Link>

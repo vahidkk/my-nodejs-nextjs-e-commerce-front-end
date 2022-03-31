@@ -11,7 +11,9 @@ const Product = ({ image, name, price, id }) => {
           <Image
             height={225}
             width={300}
-            src={Array.isArray(image) ? image[0] : image}
+            src={image[0].thumb}
+            placeholder="blur"
+            blurDataURL={`data:image/jpeg;base64,${image.small}`}
             alt={name}
             className="img"
           />

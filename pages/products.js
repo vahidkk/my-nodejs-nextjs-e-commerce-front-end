@@ -4,8 +4,9 @@ import PageHero from "../components/PageHero";
 import Filters from "../components/Filters";
 import Sort from "../components/Sort";
 import Head from "next/head";
+import { getPictures } from "./api/pictures";
 
-const ProductsPage = () => {
+const ProductsPage = ({ manipulateDataWithNewImages }) => {
   return (
     <main>
       <Head>
@@ -14,10 +15,10 @@ const ProductsPage = () => {
       <PageHero title="products" />
       <Wrapper className="page">
         <div className="section-center products">
-          <Filters />
+          <Filters data={manipulateDataWithNewImages} />
           <div>
             <Sort />
-            <ProductList />
+            <ProductList data={manipulateDataWithNewImages} />
           </div>
         </div>
       </Wrapper>
@@ -37,5 +38,19 @@ const Wrapper = styled.div`
     }
   }
 `;
+
+export async function getStaticProps() {
+  const res = await fetch(process.env.MY_API_PRODUCTS_ROUTE);
+  const data = await res.json();
+  const rawImages = data.products.map((i) => {
+    return i.image[0];
+  });
+  const pictures = await getPictures(rawImages);
+
+  const manipulateDataWithNewImages = data.products.map((item, index) => {
+    return { ...item, image: [pictures[index]] };
+  });
+  return { props: { manipulateDataWithNewImages } };
+}
 
 export default ProductsPage;

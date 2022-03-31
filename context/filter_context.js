@@ -33,20 +33,22 @@ const initialState = {
 const FilterContext = createContext();
 
 export const FilterProvider = ({ children }) => {
-  const { data, isLoading, isError } = useAllProducts();
+  // const { data, isLoading, isError } = useAllProducts();
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
-
-  useEffect(() => {
-    !isLoading && dispatch({ type: LOAD_PRODUCTS, payload: data.products });
-  }, [isLoading]);
 
   useEffect(() => {
     dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [isLoading, state.sort, state.filters]);
+  }, [state.sort, state.filters]);
+  useEffect(() => {
+    dispatch({ type: FILTER_PRODUCTS });
+    dispatch({ type: SORT_PRODUCTS });
+  }, []);
 
+  const loadProducts = (data) => {
+    dispatch({ type: LOAD_PRODUCTS, payload: data });
+  };
   const setGridView = () => {
     dispatch({ type: SET_GRIDVIEW });
   };
@@ -86,6 +88,7 @@ export const FilterProvider = ({ children }) => {
         updateSort,
         updateFilters,
         clearFilters,
+        loadProducts,
       }}
     >
       {children}
