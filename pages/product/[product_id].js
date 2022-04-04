@@ -1,9 +1,6 @@
 import { useRouter } from "next/router";
-import { useSingleProduct } from "../../utils/useSWR";
 import { formatPrice } from "../../utils/helpers";
 import PageHero from "../../components/PageHero";
-import Loading from "../../components/Loading";
-import Error from "../../components/Error";
 import Stars from "../../components/Stars";
 import ProductImages from "../../components/ProductImages";
 import AddToCart from "../../components/AddToCart";
@@ -62,10 +59,6 @@ export async function getStaticPaths() {
   const paths = posts.products.map((post) => ({
     params: { product_id: post._id },
   }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: blocking } will server-render pages
-  // on-demand if the path doesn't exist.
   return { paths, fallback: "blocking" };
 }
 
@@ -75,7 +68,6 @@ export async function getStaticProps(context) {
   );
   const data = await res.json();
   const pictures = await getPictures(data.product.image);
-  console.log("data2", data);
   const fetchedData = { data, pictures };
   return { props: { fetchedData } };
 }

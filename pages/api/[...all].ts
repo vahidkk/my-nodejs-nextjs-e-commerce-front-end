@@ -1,4 +1,3 @@
-
 import { NextApiRequest, NextApiResponse } from "next";
 import httpProxyMiddleware from "next-http-proxy-middleware";
 export default (req: NextApiRequest, res: NextApiResponse) =>
@@ -9,6 +8,7 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
     cookieDomainRewrite:process.env.MY_FRONTEND_DOMAIN,
 
     pathRewrite: {
+      "^/api/revalidate": '/api/revalidate',
       "^/api/": '/api/v1/',
     },
   });

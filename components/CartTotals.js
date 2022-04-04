@@ -8,20 +8,12 @@ import { useRouter } from "next/router";
 const CartTotals = ({ data }) => {
   const { loggedInUser } = useCurrentUser();
   const router = useRouter();
-
+  console.log("carttotals data received ?", data);
   const {
     total_amount: total_amount_context,
     shipping_fee: shipping_fee_context,
   } = useCartContext();
 
-  if (data) {
-    const {
-      total,
-      subtotal: total_amount_history,
-      shippingFee: shipping_fee_history,
-      tax,
-    } = data;
-  }
   return (
     <Wrapper>
       <div>
@@ -29,32 +21,24 @@ const CartTotals = ({ data }) => {
           <h5>
             subtotal :{" "}
             <span>
-              {formatPrice(
-                total_amount_history
-                  ? total_amount_history
-                  : total_amount_context
-              )}
+              {formatPrice(data ? data.subtotal : total_amount_context)}
             </span>
           </h5>
           <p>
             shipping fee :{" "}
             <span>
-              {formatPrice(
-                shipping_fee_history
-                  ? shipping_fee_history
-                  : shipping_fee_context
-              )}
+              {formatPrice(data ? data.shippingFee : shipping_fee_context)}
             </span>
           </p>
           <p>
-            tax : <span>{formatPrice(tax ? tax : 1)}</span>
+            tax : <span>{formatPrice(data ? data.tax : 1)}</span>
           </p>
           <hr />
           <h4>
             order total :
             <span>
-              {total
-                ? formatPrice(total)
+              {data
+                ? formatPrice(data.total)
                 : formatPrice(total_amount_context + shipping_fee_context + 1)}
             </span>
           </h4>

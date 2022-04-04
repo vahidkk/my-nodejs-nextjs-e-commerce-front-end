@@ -93,9 +93,16 @@ const CheckoutForm = () => {
         paymentIntentId: intentId,
         status: orderStatus,
       });
-    } catch (err) {
-      // console.log(error.response)
-    }
+      if (orderStatus === "paid") {
+        for (const item of purchase) {
+          const revalidate = await axios.get(
+            `/api/revalidate?secret=${
+              process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN
+            }&path=${"product/" + item.product}`
+          );
+        }
+      }
+    } catch (err) {}
   };
   useEffect(() => {
     total_amount && createPaymentIntent() && postOrderToBackEnd("pending");

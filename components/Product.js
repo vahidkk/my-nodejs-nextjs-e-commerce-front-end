@@ -77,7 +77,8 @@ const Wrapper = styled.article`
   footer {
     margin-top: 1rem;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: flex-start;
     align-items: center;
   }
   footer h5,
@@ -86,6 +87,9 @@ const Wrapper = styled.article`
     font-weight: 400;
     color: var(--clr-grey-2);
     letter-spacing: var(--spacing);
+  }
+  footer p {
+    margin-left: 1.8vw;
   }
 `;
 export default Product;

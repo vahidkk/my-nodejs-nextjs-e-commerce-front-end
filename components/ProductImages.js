@@ -5,11 +5,11 @@ import Loading from "./Loading";
 
 const ProductImages = ({ images }) => {
   const [main, setMain] = useState(images[0]);
-
   return (
     <Wrapper>
       {main ? (
         <Image
+          key={main.large}
           src={main.large}
           placeholder="blur"
           blurDataURL={`data:image/jpeg;base64,${main.small}`}
@@ -25,16 +25,21 @@ const ProductImages = ({ images }) => {
       <div className="gallery">
         {images.map((image, index) => {
           return (
-            <Image
-              height="100%"
-              width="100%"
-              src={image.large}
-              placeholder="blur"
-              blurDataURL={`data:image/jpeg;base64,${image.small}`}
-              key={index}
-              onClick={() => setMain(images[index])}
-              className={`${image === main.large ? "active" : null} pointer`}
-            />
+            <span
+              className={`${
+                image.large === main.large ? "active " : "pointer "
+              } span-image-border`}
+            >
+              <Image
+                height="100%"
+                width="100%"
+                src={image.large}
+                placeholder="blur"
+                blurDataURL={`data:image/jpeg;base64,${image.small}`}
+                key={index}
+                onClick={() => setMain(images[index])}
+              />
+            </span>
           );
         })}
       </div>
@@ -62,27 +67,31 @@ const Wrapper = styled.section`
     }
   }
   .active {
-    border: 2px solid var(--clr-primary-5);
+    border: 1px solid var(--clr-primary-6);
+  }
+  .span-image-border {
+    display: flex;
+    width: fit-content;
   }
   @media (max-width: 576px) {
     .main {
       height: 300px;
     }
-    .gallery {
+    /* .gallery {
       .pointer {
         height: 50px;
       }
-    }
+    } */
   }
   @media (min-width: 992px) {
     .main {
       height: 500px;
     }
-    .gallery {
+    /* .gallery {
       .pointer {
         height: 75px;
       }
-    }
+    } */
   }
 `;
 
