@@ -26,6 +26,7 @@ const ProductImages = ({ images }) => {
         {images.map((image, index) => {
           return (
             <span
+              key={index}
               className={`${
                 image.large === main.large ? "active " : "pointer "
               } span-image-border`}
