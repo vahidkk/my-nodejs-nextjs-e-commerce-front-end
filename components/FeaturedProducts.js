@@ -25,6 +25,7 @@ const FeaturedProducts = ({ data: featured }) => {
 };
 
 const Wrapper = styled.section`
+  text-align: center;
   background: var(--clr-grey-10);
   .featured {
     margin: 4rem auto;
@@ -40,7 +41,9 @@ const Wrapper = styled.section`
     margin: 0 auto;
     text-align: center;
   }
-  @media (min-width: 576px) {
+  @media (min-width: 844px) {
+    text-align: unset;
+
     .featured {
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     }

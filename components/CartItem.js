@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import AmountButtons from "./AmountButtons";
-import { FaTrash } from "react-icons/fa";
+import { MdRemoveShoppingCart } from "react-icons/md";
 import { useCartContext } from "../context/cart_context";
 import Image from "next/image";
 
@@ -43,7 +43,7 @@ const CartItem = ({ id, image, name, color, price, amount, orderHistory }) => {
           className="remove-btn"
           onClick={() => removeItem(id)}
         >
-          <FaTrash />
+          <MdRemoveShoppingCart title="Remove" />
         </button>
       )}
     </Wrapper>
@@ -117,21 +117,35 @@ const Wrapper = styled.article`
     }
   }
   .remove-btn {
-    color: var(--clr-white);
+    color: var(--clr-primary-2);
+
     background: transparent;
     border: transparent;
     letter-spacing: var(--spacing);
-    background: var(--clr-red-dark);
     width: 1.5rem;
     height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--radius);
-    font-size: 0.75rem;
+    font-size: 1rem;
     cursor: pointer;
   }
   @media (min-width: 776px) {
+    .remove-btn {
+      color: var(--clr-primary-2);
+      background: transparent;
+      border: transparent;
+      letter-spacing: var(--spacing);
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      font-size: 1.75rem;
+      cursor: pointer;
+    }
     .subtotal {
       display: block;
       margin-bottom: 0;

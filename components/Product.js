@@ -79,6 +79,9 @@ const Wrapper = styled.article`
     display: flex;
     /* justify-content: space-between; */
     justify-content: flex-start;
+    @media (max-width: 844px) {
+      justify-content: center;
+    }
     align-items: center;
   }
   footer h5,

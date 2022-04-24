@@ -34,9 +34,9 @@ const CartContent = ({ data }) => {
           </p>
         </Link>
         {!data ? (
-          <button type="button" className="btn " onClick={clearCart}>
+          <p type="button" className="btn margin-left" onClick={clearCart}>
             clear shopping cart
-          </button>
+          </p>
         ) : (
           <>
             <h4>order status : {data.order.status}</h4>
@@ -56,6 +56,14 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
+  }
+  @media (max-width: 776px) {
+    .btn {
+      text-align: center;
+    }
+    .margin-left {
+      margin-left: 10px;
+    }
   }
 `;
 export default CartContent;

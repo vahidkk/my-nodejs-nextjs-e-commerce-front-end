@@ -5,11 +5,11 @@ const AmountButtons = ({ increase, decrease, amount }) => {
   return (
     <Wrapper>
       <button type="button" onClick={decrease}>
-        <FaMinus />
+        <FaMinus title="Decrease quantity" />
       </button>
       <h2>{amount}</h2>
       <button type="button" onClick={increase}>
-        <FaPlus />
+        <FaPlus title="Increase quantity" />
       </button>
     </Wrapper>
   );
@@ -17,7 +17,7 @@ const AmountButtons = ({ increase, decrease, amount }) => {
 
 const Wrapper = styled.div`
   display: grid;
-  width: 140px;
+  width: 100px;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
@@ -36,6 +36,9 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     color: var(--clr-grey-5);
+  }
+  @media (min-width: 776px) {
+    width: 140px;
   }
 `;
 
